@@ -11,7 +11,7 @@ interface ShareButtonsProps {
   watermark?: string;
 }
 
-export function ShareButtons({ captureRef, text, watermark = "miinflacion.ar" }: ShareButtonsProps) {
+export function ShareButtons({ captureRef, text, watermark = "miinflacion.vercel.app" }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
   const [generating, setGenerating] = useState(false);
 

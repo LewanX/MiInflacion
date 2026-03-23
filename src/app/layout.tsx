@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
   description:
     "Calculá la inflación acumulada y descubrí cuánto deberías cobrar. Datos oficiales del INDEC, actualizados automáticamente.",
-  metadataBase: new URL("https://miinflacion.ar"),
+  metadataBase: new URL("https://miinflacion.vercel.app"),
   icons: {
     icon: "/img/Logo.png",
     apple: "/img/Logo.png",

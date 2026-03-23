@@ -196,7 +196,7 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
             </div>
             <ShareButtons
               captureRef={cardRef}
-              text={`Lo que costaba ${formatCurrency(monto)} ahora cuesta ${formatCurrency(ajustado)}. La inflación acumulada fue de ${formatPercent(inflacion)}.\n\nCalculá la tuya en miinflacion.ar`}
+              text={`Lo que costaba ${formatCurrency(monto)} ahora cuesta ${formatCurrency(ajustado)}. La inflación acumulada fue de ${formatPercent(inflacion)}.\n\nCalculá la tuya en miinflacion.vercel.app`}
             />
           </div>
         ) : (

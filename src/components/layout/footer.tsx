@@ -39,7 +39,7 @@ export function Footer() {
             Bancá este proyecto
           </a>
           <span className="text-border">·</span>
-          <span className="font-mono text-xs">miinflacion.ar</span>
+          <span className="font-mono text-xs">miinflacion.vercel.app</span>
         </div>
       </div>
     </footer>

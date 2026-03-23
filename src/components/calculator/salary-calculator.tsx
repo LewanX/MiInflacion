@@ -292,7 +292,7 @@ export function SalaryCalculator({
 
                 <ShareButtons
                   captureRef={resultCardRef}
-                  text={`Debería cobrar ${formatCurrency(ajustado)} pero cobro ${formatCurrency(sueldoActual)}. Perdí ${formatPercent(perdida)} de poder adquisitivo.\n\nCalculá el tuyo en miinflacion.ar`}
+                  text={`Debería cobrar ${formatCurrency(ajustado)} pero cobro ${formatCurrency(sueldoActual)}. Perdí ${formatPercent(perdida)} de poder adquisitivo.\n\nCalculá el tuyo en miinflacion.vercel.app`}
                 />
               </CardContent>
             </Card>
