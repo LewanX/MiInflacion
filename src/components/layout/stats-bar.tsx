@@ -66,11 +66,12 @@ export function StatsBar({ data }: StatsBarProps) {
       ref={containerRef}
       className="grid grid-cols-1 gap-3 overflow-visible sm:grid-cols-3 sm:gap-4"
     >
-      {stats.map((stat) => (
+      {stats.map((stat, index) => (
         <div
           key={stat.label}
           data-stat
-          className="flex items-center gap-4 rounded-lg border border-border bg-card p-4 overflow-visible sm:flex-col sm:text-center sm:gap-1"
+          className="relative flex items-center gap-4 rounded-lg border border-border bg-card p-4 overflow-visible sm:flex-col sm:text-center sm:gap-1"
+          style={{ zIndex: stats.length - index }}
         >
           <div className="flex items-center gap-1 sm:mb-1">
             <p className="text-xs uppercase tracking-wider text-muted-foreground">
