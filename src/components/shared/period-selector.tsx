@@ -45,7 +45,7 @@ export function PeriodSelector({
           value={String(mesDesde)}
           onValueChange={(v) => onMesDesdeChange(Number(v))}
         >
-          <SelectTrigger className="w-32">
+          <SelectTrigger className="w-32" aria-label="Mes desde">
             <SelectValue>
               {MESES[mesDesde - 1]?.slice(0, 3)}
             </SelectValue>
@@ -70,7 +70,7 @@ export function PeriodSelector({
           value={String(anioDesde)}
           onValueChange={(v) => onAnioDesdeChange(Number(v))}
         >
-          <SelectTrigger className="w-24">
+          <SelectTrigger className="w-24" aria-label="Año desde">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -88,7 +88,7 @@ export function PeriodSelector({
           value={String(mesHasta)}
           onValueChange={(v) => onMesHastaChange(Number(v))}
         >
-          <SelectTrigger className="w-32">
+          <SelectTrigger className="w-32" aria-label="Mes hasta">
             <SelectValue>
               {MESES[mesHasta - 1]?.slice(0, 3)}
             </SelectValue>
@@ -113,7 +113,7 @@ export function PeriodSelector({
           value={String(anioHasta)}
           onValueChange={(v) => onAnioHastaChange(Number(v))}
         >
-          <SelectTrigger className="w-24">
+          <SelectTrigger className="w-24" aria-label="Año hasta">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>

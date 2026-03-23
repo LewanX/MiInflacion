@@ -42,6 +42,7 @@ export function Navbar() {
             width={32}
             height={32}
             className="invert"
+            priority
           />
           MiInflación
         </Link>

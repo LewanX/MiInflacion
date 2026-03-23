@@ -31,7 +31,7 @@ export function InfoTooltip({ text, className, side = "auto" }: InfoTooltipProps
       <button
         ref={btnRef}
         type="button"
-        className="text-muted-foreground/40 hover:text-muted-foreground transition-colors"
+        className="min-h-11 min-w-11 flex items-center justify-center text-muted-foreground/40 hover:text-muted-foreground transition-colors"
         onMouseEnter={() => { updatePosition(); setOpen(true); }}
         onMouseLeave={() => setOpen(false)}
         onClick={() => { updatePosition(); setOpen(!open); }}

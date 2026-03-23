@@ -97,25 +97,26 @@ export function ShareButtons({ captureRef, text, watermark = "miinflacion.vercel
 
   return (
     <div data-hide-capture className="flex flex-wrap gap-2 pt-2">
-      <Button variant="outline" size="sm" onClick={handleCopy}>
+      <Button variant="outline" size="sm" className="min-h-11" onClick={handleCopy}>
         {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
         {copied ? "Copiado" : "Copiar"}
       </Button>
       <Button
         variant="outline"
         size="sm"
+        className="min-h-11"
         onClick={handleShareWithImage}
         disabled={generating}
       >
         <Share2 className="size-3.5" />
         {generating ? "Generando..." : "Compartir"}
       </Button>
-      <Button variant="outline" size="sm" onClick={handleDownload} disabled={generating}>
+      <Button variant="outline" size="sm" className="min-h-11" onClick={handleDownload} disabled={generating}>
         <Download className="size-3.5" />
         Descargar
       </Button>
       <a
-        className={buttonVariants({ variant: "outline", size: "sm" })}
+        className={buttonVariants({ variant: "outline", size: "sm", className: "min-h-11" })}
         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`}
         target="_blank"
         rel="noopener noreferrer"

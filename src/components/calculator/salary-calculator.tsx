@@ -173,10 +173,10 @@ export function SalaryCalculator({
 
           <div className="space-y-4">
             <div>
-              <label className="text-sm text-muted-foreground mb-1.5 block">
+              <label htmlFor="sueldo-inicial" className="text-sm text-muted-foreground mb-1.5 block">
                 Sueldo cuando empezaste
               </label>
-              <CurrencyInput value={sueldoInicial} onChange={setSueldoInicial} />
+              <CurrencyInput value={sueldoInicial} onChange={setSueldoInicial} id="sueldo-inicial" />
             </div>
 
             <div>
@@ -188,7 +188,7 @@ export function SalaryCalculator({
                   value={String(mesInicio)}
                   onValueChange={(v) => setMesInicio(Number(v))}
                 >
-                  <SelectTrigger className="flex-1">
+                  <SelectTrigger className="flex-1" aria-label="Mes inicio del período">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -207,7 +207,7 @@ export function SalaryCalculator({
                   value={String(anioInicio)}
                   onValueChange={(v) => setAnioInicio(Number(v))}
                 >
-                  <SelectTrigger className="w-28">
+                  <SelectTrigger className="w-28" aria-label="Año inicio del período">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -222,10 +222,10 @@ export function SalaryCalculator({
             </div>
 
             <div>
-              <label className="text-sm text-muted-foreground mb-1.5 block">
+              <label htmlFor="sueldo-actual" className="text-sm text-muted-foreground mb-1.5 block">
                 Tu sueldo actual
               </label>
-              <CurrencyInput value={sueldoActual} onChange={setSueldoActual} />
+              <CurrencyInput value={sueldoActual} onChange={setSueldoActual} id="sueldo-actual" />
             </div>
 
             <Button onClick={handleCalculate} className="w-full" size="lg">

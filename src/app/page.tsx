@@ -56,6 +56,26 @@ export default async function HomePage() {
           }),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "MiInflación",
+            url: "https://miinflacion.vercel.app",
+            description:
+              "Calculadora de inflación argentina en tiempo real. Datos oficiales del INDEC.",
+            inLanguage: "es-AR",
+            potentialAction: {
+              "@type": "SearchAction",
+              target:
+                "https://miinflacion.vercel.app/?q={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
+          }),
+        }}
+      />
     </div>
   );
 }

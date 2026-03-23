@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Categorías — Inflación por rubro",
   description:
     "Inflación desglosada por categoría: alimentos, vivienda, transporte, salud y más. Datos oficiales del INDEC.",
+  alternates: {
+    canonical: "/categorias",
+  },
 };
 
 export default async function CategoriasPage() {

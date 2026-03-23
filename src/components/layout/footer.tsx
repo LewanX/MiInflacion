@@ -21,7 +21,7 @@ export function Footer() {
             href="https://www.indec.gob.ar"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 underline underline-offset-4 hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-1 py-2 underline underline-offset-4 hover:text-foreground transition-colors"
           >
             INDEC
             <ExternalLink className="size-3" />
@@ -33,7 +33,7 @@ export function Footer() {
             href="https://cafecito.app/ellewan"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-1 py-2 hover:text-foreground transition-colors"
           >
             <Heart className="size-3" />
             Bancá este proyecto

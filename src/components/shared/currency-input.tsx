@@ -7,9 +7,11 @@ interface CurrencyInputProps {
   value: number;
   onChange: (value: number) => void;
   className?: string;
+  id?: string;
+  "aria-label"?: string;
 }
 
-export function CurrencyInput({ value, onChange, className }: CurrencyInputProps) {
+export function CurrencyInput({ value, onChange, className, id, "aria-label": ariaLabel }: CurrencyInputProps) {
   const [display, setDisplay] = useState(formatDisplay(value));
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -39,6 +41,8 @@ export function CurrencyInput({ value, onChange, className }: CurrencyInputProps
         inputMode="numeric"
         value={display}
         placeholder="100.000"
+        id={id}
+        aria-label={ariaLabel}
         className={`pl-7 font-mono tabular-nums ${className ?? ""}`}
         onFocus={() => {
           if (value === 0) setDisplay("");

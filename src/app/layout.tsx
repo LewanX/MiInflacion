@@ -13,7 +13,22 @@ export const metadata: Metadata = {
   },
   description:
     "Calculá la inflación acumulada y descubrí cuánto deberías cobrar. Datos oficiales del INDEC, actualizados automáticamente.",
+  keywords: [
+    "inflación argentina",
+    "calculadora inflación",
+    "IPC",
+    "INDEC",
+    "inflación tiempo real",
+    "inflación mensual",
+    "inflación acumulada",
+    "sueldo vs inflación",
+    "IPC argentina",
+    "inflación por categoría",
+  ],
   metadataBase: new URL("https://miinflacion.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/img/Logo.png",
     apple: "/img/Logo.png",
@@ -22,6 +37,8 @@ export const metadata: Metadata = {
     title: "MiInflación — ¿Cuánto deberías estar cobrando?",
     description:
       "Tu sueldo vs la inflación real. Datos oficiales del INDEC.",
+    url: "https://miinflacion.vercel.app",
+    siteName: "MiInflación",
     type: "website",
     locale: "es_AR",
     images: [{ url: "/img/Logo.png" }],
@@ -45,8 +62,16 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <Navbar />
-        <main className="flex-1">{children}</main>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-background focus:text-foreground"
+        >
+          Saltar al contenido principal
+        </a>
+        <header>
+          <Navbar />
+        </header>
+        <main id="main-content" className="flex-1">{children}</main>
         <Footer />
         <Analytics />
       </body>

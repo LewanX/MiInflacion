@@ -88,10 +88,10 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
       </CardHeader>
       <CardContent className="space-y-6">
         <div>
-          <label className="text-sm text-muted-foreground mb-1.5 block">
+          <label htmlFor="monto-inflacion" className="text-sm text-muted-foreground mb-1.5 block">
             Monto
           </label>
-          <CurrencyInput value={monto} onChange={setMonto} />
+          <CurrencyInput value={monto} onChange={setMonto} id="monto-inflacion" />
         </div>
 
         <div className="grid grid-cols-2 gap-3">
@@ -104,7 +104,7 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
                 value={String(mesDesde)}
                 onValueChange={(v) => setMesDesde(Number(v))}
               >
-                <SelectTrigger className="flex-1">
+                <SelectTrigger className="flex-1" aria-label="Mes desde">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -123,7 +123,7 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
                 value={String(anioDesde)}
                 onValueChange={(v) => setAnioDesde(Number(v))}
               >
-                <SelectTrigger className="w-24">
+                <SelectTrigger className="w-24" aria-label="Año desde">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -146,7 +146,7 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
                 value={String(mesHasta)}
                 onValueChange={(v) => setMesHasta(Number(v))}
               >
-                <SelectTrigger className="flex-1">
+                <SelectTrigger className="flex-1" aria-label="Mes hasta">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -165,7 +165,7 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
                 value={String(anioHasta)}
                 onValueChange={(v) => setAnioHasta(Number(v))}
               >
-                <SelectTrigger className="w-24">
+                <SelectTrigger className="w-24" aria-label="Año hasta">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

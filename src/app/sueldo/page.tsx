@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Mi Sueldo — ¿Cuánto deberías cobrar?",
   description:
     "Ingresá tu sueldo y descubrí cuánto deberías estar cobrando ajustado por inflación. Datos oficiales del INDEC.",
+  alternates: {
+    canonical: "/sueldo",
+  },
 };
 
 export default async function SueldoPage() {
