@@ -7,20 +7,24 @@ import { cn } from "@/lib/utils";
 interface InfoTooltipProps {
   text: string;
   className?: string;
+  side?: "auto" | "top" | "bottom";
 }
 
-export function InfoTooltip({ text, className }: InfoTooltipProps) {
+export function InfoTooltip({ text, className, side = "auto" }: InfoTooltipProps) {
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState<"top" | "bottom">("top");
   const btnRef = useRef<HTMLButtonElement>(null);
-  const tipRef = useRef<HTMLSpanElement>(null);
 
   const updatePosition = useCallback(() => {
+    if (side !== "auto") {
+      setPos(side);
+      return;
+    }
     if (!btnRef.current) return;
     const rect = btnRef.current.getBoundingClientRect();
-    // If too close to top, show below instead
-    setPos(rect.top < 80 ? "bottom" : "top");
-  }, []);
+    // Need ~100px above for the tooltip. Check viewport space + parent clipping
+    setPos(rect.top < 120 ? "bottom" : "top");
+  }, [side]);
 
   return (
     <span className={cn("relative inline-flex items-center", className)}>
@@ -37,12 +41,11 @@ export function InfoTooltip({ text, className }: InfoTooltipProps) {
       </button>
       {open && (
         <span
-          ref={tipRef}
           className={cn(
-            "absolute left-1/2 z-[9999] w-48 max-w-[calc(100vw-2rem)] rounded-lg border border-border bg-popover px-3 py-2 text-xs text-popover-foreground shadow-lg pointer-events-none",
+            "absolute z-[9999] w-48 max-w-[calc(100vw-2rem)] rounded-lg border border-border bg-popover px-3 py-2 text-xs text-popover-foreground shadow-lg pointer-events-none",
             pos === "top"
-              ? "bottom-full mb-2 -translate-x-1/2"
-              : "top-full mt-2 -translate-x-1/2"
+              ? "bottom-full mb-2 left-1/2 -translate-x-1/2"
+              : "top-full mt-2 right-0"
           )}
         >
           {text}

@@ -79,11 +79,11 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
     data.some((d) => d.periodo === periodoHasta);
 
   return (
-    <Card ref={cardRef} className="bg-card border-border">
+    <Card ref={cardRef} className="bg-card border-border overflow-visible">
       <CardHeader>
         <div className="flex items-center gap-2">
           <CardTitle className="text-xl">Calculadora de inflación</CardTitle>
-          <InfoTooltip text="Calculá cuánto necesitarías hoy para comprar lo mismo que comprabas antes. Usa el IPC oficial del INDEC." />
+          <InfoTooltip side="bottom" text="Calculá cuánto necesitarías hoy para comprar lo mismo que comprabas antes. Usa el IPC oficial del INDEC." />
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
