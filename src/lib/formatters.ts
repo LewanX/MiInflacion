@@ -4,12 +4,12 @@ export function formatCurrency(value: number): string {
   return new Intl.NumberFormat("es-AR", {
     style: "currency",
     currency: "ARS",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   }).format(value);
 }
 
-export function formatPercent(value: number, decimals = 1): string {
+export function formatPercent(value: number, decimals = 2): string {
   return `${value.toFixed(decimals).replace(".", ",")}%`;
 }
 

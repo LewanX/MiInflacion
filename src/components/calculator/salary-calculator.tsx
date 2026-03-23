@@ -157,13 +157,18 @@ export function SalaryCalculator({
       >
         {/* Form */}
         <div ref={formRef} className="space-y-6">
-          <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl">
-            ¿Cuánto deberías
-            <br />
-            <span className="bg-gradient-to-b from-foreground to-muted-foreground bg-clip-text text-transparent">
-              estar cobrando?
-            </span>
-          </h1>
+          <div>
+            <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl">
+              ¿Cuánto deberías
+              <br />
+              <span className="bg-gradient-to-b from-foreground to-muted-foreground bg-clip-text text-transparent">
+                estar cobrando?
+              </span>
+            </h1>
+            <p className="text-sm text-muted-foreground mt-3">
+              Compará tu sueldo con la inflación real y descubrí cuánto perdiste.
+            </p>
+          </div>
 
           <div className="space-y-4">
             <div>
@@ -235,7 +240,9 @@ export function SalaryCalculator({
               <CardContent className="p-6 space-y-6">
                 <div>
                   <p className="text-sm text-muted-foreground">
-                    Deberías cobrar
+                    {perdida > 0
+                      ? "Para mantener tu poder adquisitivo deberías cobrar"
+                      : "Para mantener tu poder adquisitivo necesitabas"}
                   </p>
                   <p className="text-4xl font-bold font-mono tabular-nums tracking-tight mt-1">
                     {formatCurrency(ajustado)}
@@ -243,21 +250,30 @@ export function SalaryCalculator({
                 </div>
 
                 <div data-badge>
-                  <Badge
-                    variant={perdida > 0 ? "destructive" : "secondary"}
-                    className="text-sm px-3 py-1"
-                  >
-                    {perdida > 0
-                      ? `Perdiste ${formatPercent(perdida)} de poder adquisitivo`
-                      : `Ganaste ${formatPercent(Math.abs(perdida))} de poder adquisitivo`}
-                  </Badge>
-                  {perdida > 0 && (
-                    <p className="text-sm text-muted-foreground mt-2">
-                      Te faltan{" "}
-                      <span className="font-mono text-destructive">
-                        {formatCurrency(ajustado - sueldoActual)}
-                      </span>
-                    </p>
+                  {perdida > 0 ? (
+                    <>
+                      <Badge variant="destructive" className="text-sm px-3 py-1">
+                        Perdiste {formatPercent(perdida)} de poder adquisitivo
+                      </Badge>
+                      <p className="text-sm text-muted-foreground mt-2">
+                        Te faltan{" "}
+                        <span className="font-mono text-destructive">
+                          {formatCurrency(ajustado - sueldoActual)}
+                        </span>
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <Badge variant="secondary" className="text-sm px-3 py-1 border-green-500/30 text-green-400">
+                        Tu sueldo le ganó a la inflación
+                      </Badge>
+                      <p className="text-sm text-muted-foreground mt-2">
+                        Superás lo necesario por{" "}
+                        <span className="font-mono text-green-400">
+                          {formatCurrency(sueldoActual - ajustado)}
+                        </span>
+                      </p>
+                    </>
                   )}
                 </div>
 

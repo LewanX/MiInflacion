@@ -99,11 +99,11 @@ export function CategoriasView({
   return (
     <div className="space-y-10">
       <div>
-        <h1 className="text-4xl font-bold tracking-tight mb-2">
-          Inflación por categoría
+        <h1 className="text-4xl font-extrabold tracking-tighter mb-2">
+          ¿Qué rubros subieron más?
         </h1>
-        <p className="text-muted-foreground">
-          Desglose del IPC por rubro COICOP. Datos oficiales del INDEC.
+        <p className="text-sm text-muted-foreground">
+          Inflación desglosada por categoría. Datos oficiales del INDEC.
         </p>
       </div>
 

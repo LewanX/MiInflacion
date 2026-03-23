@@ -2,16 +2,29 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 import type { IPCDataPoint } from "@/lib/types";
 import { formatPercent, formatMesAnio } from "@/lib/formatters";
+import { InfoTooltip } from "@/components/shared/info-tooltip";
+import { cn } from "@/lib/utils";
 
 interface StatsBarProps {
   data: IPCDataPoint[];
 }
 
+function DeltaArrow({ current, previous }: { current: number | null; previous: number | null }) {
+  if (current == null || previous == null) return null;
+  const diff = current - previous;
+  if (Math.abs(diff) < 0.05) return <Minus className="size-3 text-muted-foreground" />;
+  // For inflation: lower is better → green when decreasing
+  if (diff < 0) return <TrendingDown className="size-3 text-green-500" />;
+  return <TrendingUp className="size-3 text-red-400" />;
+}
+
 export function StatsBar({ data }: StatsBarProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const last = data[data.length - 1];
+  const prev = data.length >= 2 ? data[data.length - 2] : null;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -28,14 +41,23 @@ export function StatsBar({ data }: StatsBarProps) {
     {
       label: "Mensual",
       value: last.variacionMensual != null ? formatPercent(last.variacionMensual) : "—",
+      subtitle: "Vs mes anterior",
+      tooltip: "Variación del IPC respecto al mes anterior. Mide cuánto subieron los precios en un solo mes.",
+      delta: { current: last.variacionMensual, previous: prev?.variacionMensual ?? null },
     },
     {
       label: "Interanual",
       value: last.variacionInteranual != null ? formatPercent(last.variacionInteranual) : "—",
+      subtitle: "Vs mismo mes año anterior",
+      tooltip: "Compara los precios de hoy con los del mismo mes del año pasado. Es el indicador más usado en medios.",
+      delta: { current: last.variacionInteranual, previous: prev?.variacionInteranual ?? null },
     },
     {
       label: "Último dato",
       value: formatMesAnio(last.periodo),
+      subtitle: "Publicado por INDEC",
+      tooltip: "Fecha del último dato oficial disponible del Índice de Precios al Consumidor.",
+      delta: null,
     },
   ];
 
@@ -50,11 +72,22 @@ export function StatsBar({ data }: StatsBarProps) {
           data-stat
           className="rounded-lg border border-border bg-card p-4 text-center"
         >
-          <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
-            {stat.label}
-          </p>
-          <p className="text-2xl font-bold font-mono tabular-nums">
-            {stat.value}
+          <div className="flex items-center justify-center gap-1 mb-1">
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">
+              {stat.label}
+            </p>
+            <InfoTooltip text={stat.tooltip} />
+          </div>
+          <div className="flex items-center justify-center gap-1.5">
+            <p className="text-2xl font-bold font-mono tabular-nums">
+              {stat.value}
+            </p>
+            {stat.delta && (
+              <DeltaArrow current={stat.delta.current} previous={stat.delta.previous} />
+            )}
+          </div>
+          <p className="text-[10px] text-muted-foreground/50 mt-1">
+            {stat.subtitle}
           </p>
         </div>
       ))}

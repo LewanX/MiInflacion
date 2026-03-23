@@ -14,6 +14,7 @@ import {
 import { formatCurrency, formatPercent } from "@/lib/formatters";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CurrencyInput } from "@/components/shared/currency-input";
+import { InfoTooltip } from "@/components/shared/info-tooltip";
 import {
   Select,
   SelectContent,
@@ -78,7 +79,10 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
   return (
     <Card className="bg-card border-border">
       <CardHeader>
-        <CardTitle className="text-xl">Calculadora de inflación</CardTitle>
+        <div className="flex items-center gap-2">
+          <CardTitle className="text-xl">Calculadora de inflación</CardTitle>
+          <InfoTooltip text="Calculá cuánto necesitarías hoy para comprar lo mismo que comprabas antes. Usa el IPC oficial del INDEC." />
+        </div>
       </CardHeader>
       <CardContent className="space-y-6">
         <div>
@@ -182,10 +186,11 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
                 {formatCurrency(ajustado)}
               </p>
             </div>
-            <div ref={badgeRef}>
+            <div ref={badgeRef} className="flex items-center gap-1.5">
               <Badge variant="secondary" className="font-mono tabular-nums">
                 Inflación acumulada: {formatPercent(inflacion)}
               </Badge>
+              <InfoTooltip text="Porcentaje total que subieron los precios entre las dos fechas seleccionadas." />
             </div>
           </div>
         ) : (

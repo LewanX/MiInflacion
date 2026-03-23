@@ -15,12 +15,15 @@ export default async function HomePage() {
 
       <div id="calculadora" className="grid gap-8 lg:grid-cols-[1fr_380px]">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight mb-6">
-            Evolución del IPC
+          <h2 className="text-2xl font-semibold tracking-tight">
+            ¿Cómo evolucionó la inflación?
           </h2>
+          <p className="text-sm text-muted-foreground mb-6">
+            Índice de Precios al Consumidor (IPC), serie histórica desde 2017.
+          </p>
           <IPCLineChart data={data.nivelGeneral} />
-          <p className="text-xs text-muted-foreground mt-3">
-            Fuente: INDEC. Base diciembre 2016 = 100
+          <p className="text-xs text-muted-foreground/50 mt-3">
+            Fuente: INDEC · Base diciembre 2016 = 100
           </p>
         </div>
         <InflationCalculator data={data.nivelGeneral} />
