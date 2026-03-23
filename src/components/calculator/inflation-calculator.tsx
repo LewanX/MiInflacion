@@ -184,7 +184,7 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
           <div ref={resultRef} className="space-y-3 pt-2">
             <div className="border-t border-border pt-4">
               <p className="text-sm text-muted-foreground">Necesitarías</p>
-              <p className="text-3xl font-bold font-mono tabular-nums tracking-tight">
+              <p className="text-2xl sm:text-3xl font-bold font-mono tabular-nums tracking-tight break-all">
                 {formatCurrency(ajustado)}
               </p>
             </div>

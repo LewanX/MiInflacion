@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
+import { useState, useRef, useCallback } from "react";
 import { Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -12,48 +11,42 @@ interface InfoTooltipProps {
 
 export function InfoTooltip({ text, className }: InfoTooltipProps) {
   const [open, setOpen] = useState(false);
-  const [coords, setCoords] = useState({ top: 0, left: 0 });
+  const [pos, setPos] = useState<"top" | "bottom">("top");
   const btnRef = useRef<HTMLButtonElement>(null);
-  const [mounted, setMounted] = useState(false);
+  const tipRef = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => setMounted(true), []);
-
-  useEffect(() => {
-    if (open && btnRef.current) {
-      const rect = btnRef.current.getBoundingClientRect();
-      setCoords({
-        top: rect.top + window.scrollY - 8,
-        left: rect.left + rect.width / 2,
-      });
-    }
-  }, [open]);
+  const updatePosition = useCallback(() => {
+    if (!btnRef.current) return;
+    const rect = btnRef.current.getBoundingClientRect();
+    // If too close to top, show below instead
+    setPos(rect.top < 80 ? "bottom" : "top");
+  }, []);
 
   return (
-    <span className={cn("inline-flex items-center", className)}>
+    <span className={cn("relative inline-flex items-center", className)}>
       <button
         ref={btnRef}
         type="button"
         className="text-muted-foreground/40 hover:text-muted-foreground transition-colors"
-        onMouseEnter={() => setOpen(true)}
+        onMouseEnter={() => { updatePosition(); setOpen(true); }}
         onMouseLeave={() => setOpen(false)}
-        onClick={() => setOpen(!open)}
+        onClick={() => { updatePosition(); setOpen(!open); }}
         aria-label="Más información"
       >
         <Info className="size-3.5" />
       </button>
-      {open && mounted && createPortal(
+      {open && (
         <span
-          className="fixed z-[9999] w-56 rounded-lg border border-border bg-popover px-3 py-2 text-xs text-popover-foreground shadow-lg -translate-x-1/2 pointer-events-none"
-          style={{
-            top: `${coords.top}px`,
-            left: `${coords.left}px`,
-            transform: "translate(-50%, -100%)",
-          }}
+          ref={tipRef}
+          className={cn(
+            "absolute left-1/2 z-[9999] w-48 max-w-[calc(100vw-2rem)] rounded-lg border border-border bg-popover px-3 py-2 text-xs text-popover-foreground shadow-lg pointer-events-none",
+            pos === "top"
+              ? "bottom-full mb-2 -translate-x-1/2"
+              : "top-full mt-2 -translate-x-1/2"
+          )}
         >
           {text}
-          <span className="absolute top-full left-1/2 -translate-x-1/2 -mt-px border-4 border-transparent border-t-border" />
-        </span>,
-        document.body
+        </span>
       )}
     </span>
   );

@@ -129,6 +129,7 @@
   }
   html {
     @apply font-sans;
+    overflow-x: hidden;
   }
   h1, h2, h3 {
     letter-spacing: -0.025em;
