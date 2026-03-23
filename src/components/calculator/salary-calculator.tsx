@@ -59,6 +59,7 @@ export function SalaryCalculator({
   const periodoActual = lastPoint?.periodo ?? buildPeriodo(maxYear, 12);
 
   const ajustado = sueldoAjustado(sueldoInicial, nivelGeneral, periodoInicio, periodoActual);
+  const inflacionPeriodo = inflacionAcumulada(nivelGeneral, periodoInicio, periodoActual);
   const perdida = perdidaPoderAdquisitivo(
     sueldoInicial,
     sueldoActual,
@@ -239,13 +240,17 @@ export function SalaryCalculator({
             <Card className="bg-card border-border">
               <CardContent className="p-6 space-y-6">
                 <div>
+                  <p className="text-xs text-muted-foreground/60 mb-1">
+                    La inflación desde que empezaste fue de {formatPercent(inflacionPeriodo)}
+                  </p>
                   <p className="text-sm text-muted-foreground">
-                    {perdida > 0
-                      ? "Para mantener tu poder adquisitivo deberías cobrar"
-                      : "Para mantener tu poder adquisitivo necesitabas"}
+                    Para comprar lo mismo que antes necesitás
                   </p>
                   <p className="text-4xl font-bold font-mono tabular-nums tracking-tight mt-1">
                     {formatCurrency(ajustado)}
+                  </p>
+                  <p className="text-xs text-muted-foreground/40 mt-1">
+                    = tu sueldo inicial ({formatCurrency(sueldoInicial)}) ajustado por inflación
                   </p>
                 </div>
 
@@ -253,13 +258,14 @@ export function SalaryCalculator({
                   {perdida > 0 ? (
                     <>
                       <Badge variant="destructive" className="text-sm px-3 py-1">
-                        Perdiste {formatPercent(perdida)} de poder adquisitivo
+                        Tu sueldo no alcanzó a cubrir la inflación
                       </Badge>
                       <p className="text-sm text-muted-foreground mt-2">
-                        Te faltan{" "}
+                        Necesitarías un aumento de{" "}
                         <span className="font-mono text-destructive">
                           {formatCurrency(ajustado - sueldoActual)}
                         </span>
+                        {" "}para recuperar tu poder adquisitivo
                       </p>
                     </>
                   ) : (

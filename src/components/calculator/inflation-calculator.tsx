@@ -15,6 +15,7 @@ import { formatCurrency, formatPercent } from "@/lib/formatters";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CurrencyInput } from "@/components/shared/currency-input";
 import { InfoTooltip } from "@/components/shared/info-tooltip";
+import { ShareButtons } from "@/components/shared/share-buttons";
 import {
   Select,
   SelectContent,
@@ -42,6 +43,7 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
 
   const resultRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const periodoDesde = buildPeriodo(anioDesde, mesDesde);
   const periodoHasta = buildPeriodo(anioHasta, mesHasta);
@@ -77,7 +79,7 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
     data.some((d) => d.periodo === periodoHasta);
 
   return (
-    <Card className="bg-card border-border">
+    <Card ref={cardRef} className="bg-card border-border">
       <CardHeader>
         <div className="flex items-center gap-2">
           <CardTitle className="text-xl">Calculadora de inflación</CardTitle>
@@ -192,6 +194,10 @@ export function InflationCalculator({ data }: InflationCalculatorProps) {
               </Badge>
               <InfoTooltip text="Porcentaje total que subieron los precios entre las dos fechas seleccionadas." />
             </div>
+            <ShareButtons
+              captureRef={cardRef}
+              text={`Lo que costaba ${formatCurrency(monto)} ahora cuesta ${formatCurrency(ajustado)}. La inflación acumulada fue de ${formatPercent(inflacion)}.\n\nCalculá la tuya en miinflacion.ar`}
+            />
           </div>
         ) : (
           <p className="text-sm text-destructive pt-2">
