@@ -64,29 +64,29 @@ export function StatsBar({ data }: StatsBarProps) {
   return (
     <div
       ref={containerRef}
-      className="grid grid-cols-3 gap-4"
+      className="grid grid-cols-1 gap-3 overflow-visible sm:grid-cols-3 sm:gap-4"
     >
       {stats.map((stat) => (
         <div
           key={stat.label}
           data-stat
-          className="rounded-lg border border-border bg-card p-4 text-center"
+          className="flex items-center gap-4 rounded-lg border border-border bg-card p-4 overflow-visible sm:flex-col sm:text-center sm:gap-1"
         >
-          <div className="flex items-center justify-center gap-1 mb-1">
+          <div className="flex items-center gap-1 sm:mb-1">
             <p className="text-xs uppercase tracking-wider text-muted-foreground">
               {stat.label}
             </p>
-            <InfoTooltip text={stat.tooltip} />
+            <InfoTooltip side="bottom" text={stat.tooltip} />
           </div>
-          <div className="flex items-center justify-center gap-1.5">
-            <p className="text-2xl font-bold font-mono tabular-nums">
+          <div className="flex items-center gap-1.5 ml-auto sm:ml-0">
+            <p className="text-xl font-bold font-mono tabular-nums sm:text-2xl">
               {stat.value}
             </p>
             {stat.delta && (
               <DeltaArrow current={stat.delta.current} previous={stat.delta.previous} />
             )}
           </div>
-          <p className="text-[10px] text-muted-foreground/50 mt-1">
+          <p className="hidden text-[10px] text-muted-foreground/50 sm:block sm:mt-1">
             {stat.subtitle}
           </p>
         </div>

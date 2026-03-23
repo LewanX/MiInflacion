@@ -42,10 +42,10 @@ export function InfoTooltip({ text, className, side = "auto" }: InfoTooltipProps
       {open && (
         <span
           className={cn(
-            "absolute z-[9999] w-48 max-w-[calc(100vw-2rem)] rounded-lg border border-border bg-popover px-3 py-2 text-xs text-popover-foreground shadow-lg pointer-events-none",
+            "absolute z-[9999] w-52 max-w-[80vw] rounded-lg border border-border bg-zinc-900 px-3 py-2.5 text-xs leading-relaxed text-zinc-200 shadow-xl pointer-events-none",
             pos === "top"
               ? "bottom-full mb-2 left-1/2 -translate-x-1/2"
-              : "top-full mt-2 right-0"
+              : "top-full mt-2 left-0"
           )}
         >
           {text}
